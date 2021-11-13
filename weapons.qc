@@ -501,7 +501,7 @@ void(vector p1, vector p2, entity from, float damage) LightningDamage =
 		}
 		else
 		{	//R00k doors take damage but shouldnt bleed
-			particle(trace_endpos, '0 0 100', 244, 144);	// random colors like mey lucky charms!
+			particle(trace_endpos, '0 0 100', 225, 144);	// random colors like mey lucky charms!
 		}
 
 		T_Damage(trace_ent, from, from, damage);
