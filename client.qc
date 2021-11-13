@@ -684,6 +684,10 @@ void() PutClientInServer =
 	self.deadflag 				= DEAD_NO;	
 	self.pausetime 				= 0;// pausetime is set by teleporters to keep the player from moving a while
 	self.button0				= FALSE;//R00k clear shot after respawn
+	
+	
+
+
 
 	if (self.button2)	//R00k
 	{
@@ -704,9 +708,13 @@ void() PutClientInServer =
 		return;
 	}
 	*/
+	
+
 	if (!(intermission_running))
 	{
 		spot = SelectSpawnPoint ();
+		
+		
 		
 		if (self.deferspawn == TRUE)// this will stagger spawning players in coop one second apart (or so), to reduce the chance of telefragging or sticking together.
 		{
@@ -751,6 +759,7 @@ void() PutClientInServer =
 		{//R00k: make room for other players after spawning, in case there's not enough spawns.
 			self.velocity = v_forward * ((random() * 100) + 320);
 		}
+		
 	}
 	else				
 	{
@@ -1558,6 +1567,8 @@ void() ClientConnect =
 	self.attack_finished = time;
 	self.frags           = 0;
 	self.qwclient = FALSE;
+	
+
 /*
 	if ((strstrofs(infokey(self, INFOKEY_P_PROTOCOL),"world")) >= 0)
 	{
