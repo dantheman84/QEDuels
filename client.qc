@@ -926,55 +926,55 @@ void() CheckTimeLimit =
 		{
 			if ((rint ((tlimit - time)) == 300))
 			{
-				bprint ("\ngame ends in \b5\b minutes\n\n");
+				bprint ("\ngame ends in 5 minutes\n\n");
 			}
 			else
 			{
 				if ((rint ((tlimit - time)) == 60))
 				{
-					bprint ("\ngame ends in \b1\b minute\n\n");
+					bprint ("\ngame ends in 1 minute\n\n");
 				}
 				else
 				{
 					if ((rint ((tlimit - time)) == 30))
 					{
-						bprint ("\ngame ends in \b30\b seconds\n\n");
+						bprint ("\ngame ends in 30 seconds\n\n");
 					}
 					else
 					{
 						if ((rint ((tlimit - time)) == 10))
 						{
-							bprint ("\ngame ends in \b10\b seconds\n\n");
+							bprint ("\ngame ends in 10 seconds\n\n");
 						}
 						else
 						{
 							if ((rint ((tlimit - time)) == 5))
 							{
-								bprint ("\b 5 \b\n");
+								bprint (" 5 \n");
 							}
 							else
 							{
 								if ((rint ((tlimit - time)) == 4))
 								{
-									bprint ("\b 4 \b\n");
+									bprint (" 4 \n");
 								}
 								else
 								{
 									if ((rint ((tlimit - time)) == 3))
 									{
-										bprint ("\b 3 \b\n");
+										bprint (" 3 \n");
 									}
 									else
 									{
 										if ((rint ((tlimit - time)) == 2))
 										{
-											bprint ("\b 2 \b\n");
+											bprint (" 2 \n");
 										}
 										else
 										{
 											if ((rint ((tlimit - time)) == 1))
 											{
-												bprint ("\b 1 \b\n");
+												bprint (" 1 \n");
 											}
 										}
 									}
@@ -1300,6 +1300,7 @@ void() PlayerPreThink =
 
 	if ((deathmatch || coop))
 	{
+		CheckTimeLimit();
 		CheckRules();
 	}
 
