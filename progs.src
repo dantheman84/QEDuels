@@ -1,0 +1,39 @@
+../progs.dat
+
+defs.qc
+//fteextensions.qc
+//motd.qc
+subs.qc
+fight.qc
+ai.qc
+combat.qc
+items.qc
+request.qc		// R00k: voting system
+weapons.qc
+world.qc
+spectate.qc		// R00k: Modified from QuakeWorld GPL
+client.qc
+player.qc
+monsters.qc
+doors.qc
+buttons.qc
+triggers.qc
+plats.qc
+misc.qc
+//
+ogre.qc
+demon.qc
+shambler.qc
+knight.qc
+zombie.qc	//r00k moved up here
+soldier.qc
+wizard.qc
+dog.qc
+boss.qc
+//
+tarbaby.qc		// registered
+hknight.qc		// registered
+fish.qc			// registered
+shalrath.qc		// registered
+enforcer.qc		// registered
+oldone.qc		// registered
