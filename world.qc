@@ -188,6 +188,7 @@ World Types:
 //=======================
 void() worldspawn =
 {
+	startingserverflags = serverflags;
 	lastspawn = world;
 //	InitBodyQueue ();
 

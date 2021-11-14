@@ -16,8 +16,11 @@
 
     See file, 'COPYING', for details.
 */
-
-
+float startingserverflags;
+float reset_flag;
+float IDEAL_DIST_FROM_DM_SPAWN_POINT    = 384;
+float MIN_DIST_FROM_DM_SPAWN_POINT    = 84;
+entity(float forceSpawn) SelectSpawnPoint;
 void() SUB_Null = {};
 
 void() SUB_Remove = {remove(self);};

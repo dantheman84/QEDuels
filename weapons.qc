@@ -268,9 +268,9 @@ void(float damage, vector dir) TraceAttack =
 	local vector org;
 
 	vel = normalize(((dir + (v_up * crandom())) + (v_right * crandom())));
-	vel = vel + (FL_SWIM * trace_plane_normal);
+	vel = vel + (2 * trace_plane_normal);
 	vel = vel * 200;
-	org = trace_endpos - (dir * MOVETYPE_STEP);
+	org = trace_endpos - (dir * 4);
 	if (trace_ent.takedamage)
 	{
 		SpawnBlood(org, (vel * 0.2), damage);
@@ -279,10 +279,10 @@ void(float damage, vector dir) TraceAttack =
 	else
 	{
 		WriteByte(FALSE, SVC_TEMPENTITY);
-		WriteByte(FALSE, FL_SWIM);
+		WriteByte(FALSE, TE_GUNSHOT);
 		WriteCoord(FALSE, org_x);
-		WriteCoord(FALSE, 0);
-		WriteCoord(FALSE, 0);
+		WriteCoord(FALSE, org_y);
+		WriteCoord(FALSE, org_z);
 	}
 };
 
@@ -301,22 +301,24 @@ void(float shotcount, vector dir, vector spread) FireBullets =
 	
 	makevectors(self.v_angle);
 
-	src = self.origin + v_forward*10;
-	src_z = self.absmin_z + self.size_z * 0.7;//R00k: hmm, this is (32 * .7) = +22.3u _z which is eye-level not gun level (+16) ie setorigin (missile, self.origin + v_forward*8 + '0 0 16')
+	src = self.origin + (v_forward * 10);
+	ClearMultiDamage();
 
 //	ClearMultiDamage ();
-	while (shotcount > 0)
+	while ((shotcount > 0))
 	{
-		direction = dir + crandom()*spread_x*v_right + crandom()*spread_y*v_up;
-
-		traceline (src, src + direction*2048, FALSE, self);
-		if (trace_fraction != 1.0)
-			TraceAttack (4, direction);
-
+		direction = (dir + ((crandom() * spread_x) * v_right)) + ((crandom() * spread_y) * v_up);
+		traceline(src, (src + (direction * 2048)), FALSE, self);
+		if ((trace_fraction != 1.0))
+		{
+			TraceAttack(4, direction);
+		}
 		shotcount = shotcount - 1;
 	}
-	ApplyMultiDamage ();
+	ApplyMultiDamage();
 };
+
+
 
 /*
 ================
