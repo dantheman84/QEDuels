@@ -910,9 +910,13 @@ Exit deathmatch games upon conditions
 */
 
 //R00k: Split these into two different functions to be called at different intervals.
+void() GibPlayer
+
+
 void() CheckTimeLimit =
 {
 	local	float		tlimit;
+	local entity p,oself;
 	
 	if (gameover)
 		return;
@@ -933,6 +937,30 @@ void() CheckTimeLimit =
 	{
 		if (tlimit)
 		{
+			if ((rint ((tlimit - time)) == 600))
+			{
+				
+				//reset stats for 1v1
+				bprint ("\ngame ends in 10 minutes\n\n");
+				
+				//remove all players from the game and reset frags
+				
+				while((p = find(p,classname,"player"))) {
+				oself = self;
+				self=p;
+				p.health = -99;
+				GibPlayer();
+				p.deadflag = DEAD_DYING;
+				p.think = respawn;
+				p.nextthink = time + 1;
+				p.frags = 0;
+				
+				self = oself;
+				}
+				
+			}
+			else
+			{
 			if ((rint ((tlimit - time)) == 300))
 			{
 				bprint ("\ngame ends in 5 minutes\n\n");
@@ -992,7 +1020,8 @@ void() CheckTimeLimit =
 						}
 					}
 				}
-			}				
+			}
+		    }				
 		}								
 		timelimitcheck = (time + 1);
 	}
@@ -1309,7 +1338,7 @@ void() PlayerPreThink =
 
 	if ((deathmatch || coop))
 	{
-		CheckTimeLimit();
+		//CheckTimeLimit();
 		CheckRules();
 	}
 
