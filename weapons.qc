@@ -192,7 +192,7 @@ MULTI-DAMAGE
 Collects multiple small damages into a single damage
 
 ==============================================================================
-
+*/
 
 entity	multi_ent;
 float	multi_damage;
@@ -226,11 +226,11 @@ void(entity hit, float damage) AddMultiDamage =
 		multi_damage = multi_damage + damage;
 };
 
-*/
+
 //--------------------------
 // Orion's Multi_Damage Fix
 //--------------------------
-.float multi_damage;
+/*.float multi_damage;
 void() ApplyMultiDamage =
 {
 	local entity e;
@@ -247,7 +247,7 @@ void() ApplyMultiDamage =
 		}
 		e = nextent(e);
 	}
-};
+}; */
 
 /*
 ==============================================================================
@@ -264,37 +264,25 @@ TraceAttack
 */
 void(float damage, vector dir) TraceAttack =
 {
-	local	vector	vel, org;
-	
-	vel = normalize(dir + v_up*crandom() + v_right*crandom());
-	vel = vel + 2*trace_plane_normal;
+	local vector vel;
+	local vector org;
+
+	vel = normalize(((dir + (v_up * crandom())) + (v_right * crandom())));
+	vel = vel + (FL_SWIM * trace_plane_normal);
 	vel = vel * 200;
-
-	org = trace_endpos - dir*4;
-
+	org = trace_endpos - (dir * MOVETYPE_STEP);
 	if (trace_ent.takedamage)
 	{
-		if (trace_ent.solid != SOLID_BSP)
-			SpawnBlood (org, vel*0.2, damage);
-		else
-		{ // non-player triggers get smacked
-			WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-			WriteByte (MSG_BROADCAST, TE_GUNSHOT);
-			WriteCoord (MSG_BROADCAST, org_x);
-			WriteCoord (MSG_BROADCAST, org_y);
-			WriteCoord (MSG_BROADCAST, org_z);
-		}
-		//AddMultiDamage (trace_ent, damage);
-		trace_ent.multi_damage = trace_ent.multi_damage + damage;//Orion
+		SpawnBlood(org, (vel * 0.2), damage);
+		AddMultiDamage(trace_ent, damage);
 	}
 	else
-	if (trace_ent.solid)
 	{
-		WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-		WriteByte (MSG_BROADCAST, TE_GUNSHOT);
-		WriteCoord (MSG_BROADCAST, org_x);
-		WriteCoord (MSG_BROADCAST, org_y);
-		WriteCoord (MSG_BROADCAST, org_z);
+		WriteByte(FALSE, SVC_TEMPENTITY);
+		WriteByte(FALSE, FL_SWIM);
+		WriteCoord(FALSE, org_x);
+		WriteCoord(FALSE, 0);
+		WriteCoord(FALSE, 0);
 	}
 };
 
