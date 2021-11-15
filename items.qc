@@ -72,6 +72,12 @@ void() PlaceItem =
 	}
 };
 
+
+// ELOHIM_MOD - need these prototypes
+//void () weapon_touch;
+//void () ammo_touch;
+// END_MOD
+
 /*
 ============
 StartItem
@@ -81,6 +87,17 @@ Sets the clipping size and plants the object on the floor
 */
 void() StartItem =
 {
+    // ELOHIM_MOD - no weapons or ammo in practice mode
+    //if (cvar("saved1")==1)
+    //{
+     //   if (self.touch == weapon_touch || self.touch == ammo_touch)
+      //  {
+       //     remove(self);
+        //    return;
+        //}
+    //}
+    // END_MOD
+	
 	self.nextthink = time + 0.2;	// items start after other solids
 	self.think = PlaceItem;
 };

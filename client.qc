@@ -54,7 +54,9 @@ void() info_intermission =
 	self.angles = self.mangle;      // so C can get at it
 };
 
-void() SetNewParms =
+
+
+void() SetMatchParms = 
 {
 	parm1 = IT_SHOTGUN | IT_AXE;
 	parm2 = 100;
@@ -64,7 +66,23 @@ void() SetNewParms =
 	parm6 = 0;
 	parm7 = 0;
 	parm8 = 1;
-	parm9 = 0;
+	parm9 = 0;		
+}
+
+void() SetNewParms =
+{
+    parm1 = IT_SHOTGUN | IT_AXE | IT_ROCKET_LAUNCHER | IT_ARMOR3 |
+            IT_SUPER_SHOTGUN | IT_NAILGUN | IT_GRENADE_LAUNCHER |
+            IT_LIGHTNING | IT_SUPER_NAILGUN | IT_ARMOR3;
+
+    parm2 = 100;
+    parm3 = 200;
+    parm4 = 100;
+    parm5 = 200;
+    parm6 = 100;
+    parm7 = 100;
+    parm8 = 32;
+    parm9 = 80.001;
 };
 
 /*
@@ -113,6 +131,8 @@ void() SetChangeParms =
 
 void() DecodeLevelParms =
 {
+	
+	
 	if (serverflags)
 	{
 		if (world.model == "maps/start.bsp")
@@ -121,7 +141,16 @@ void() DecodeLevelParms =
 	
 	if (deathmatch)//R00k
 	{
+		if(cvar("saved1") == 1)
+		{
 		SetNewParms();
+		}
+		else 
+		{
+		if(cvar("saved1") == 2)
+		SetMatchParms();
+		}
+
 	}
 
 	if (coop)//Support for undergate coop.
@@ -437,6 +466,7 @@ void (entity ent) CreateDeadBody;//Inspired by DPMOD
 // called by ClientKill and DeadThink
 void() respawn =
 {
+	
 	self.velocity = VEC_ORIGIN;//R00k, stop them from moving.
 
 		if (deathmatch)
@@ -774,6 +804,8 @@ void() PutClientInServer =
 	self.effects  		= 0;
 	self.axhitme		= 0;
 
+
+	
 	DecodeLevelParms ();
 	
 	W_SetCurrentAmmo ();
@@ -1022,7 +1054,8 @@ Exit deathmatch games upon conditions
 */
 
 //R00k: Split these into two different functions to be called at different intervals.
-void() GibPlayer
+void() GibPlayer;
+void() SUB_regen;
 
 
 void() CheckTimeLimit =
@@ -1057,6 +1090,8 @@ void() CheckTimeLimit =
 				
 				//remove all players from the game and reset frags
 				
+				localcmd ("saved1 2\n");
+				
 				while((p = find(p,classname,"player"))) {
 				oself = self;
 				self=p;
@@ -1069,6 +1104,13 @@ void() CheckTimeLimit =
 				
 				self = oself;
 				}
+
+				utils_do_items(SUB_regen);
+				//remove all backpacks
+				utils_do_item(SUB_Remove, "item_backpack");
+				
+				bprint("All items have respawned\n");
+				//SetMatchParms();
 				
 			}
 			else

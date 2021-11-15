@@ -705,7 +705,7 @@ void() PlayerDie =
 
 	self.modelindex = modelindex_player;	// don't use eyes
 
-	if (deathmatch)
+	if (deathmatch && !(cvar("saved1")==1))
 		DropBackpack();
 	
 	self.weaponmodel = "";

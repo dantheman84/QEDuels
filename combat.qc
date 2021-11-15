@@ -159,17 +159,14 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 	// used by buttons and triggers to set activator for target firing
 	damage_attacker = attacker;
 
-	// teamplay damage avoidance + bounce
-    	if ((coop && (attacker.classname == "player") && (targ.classname == "player")) || ((teamplay == 1 && (targ.team > 0) && (targ.team == attacker.team))) && (inflictor.classname != "door") && ((targ != inflictor.owner)&&(targ.classname == "player")))
-	{
-		if ((inflictor != world) && (targ.movetype == MOVETYPE_WALK))
-		{
-			dir = targ.origin - (inflictor.absmin + inflictor.absmax) * 0.5;
-			dir = normalize(dir);
-			targ.velocity = targ.velocity + dir*damage*8;
-		}
-		return;		
-	}
+	// team play damage avoidance
+	 // ELOHIM_MOD - nested the ifs
+	    if (teamplay == 1)
+	    {
+		if ( (targ.team > 0)&&(targ.team == attacker.team) )
+		    return;
+	    }
+	    // END_MOD
 
 	// check for quad damage powerup on the attacker
 	if (attacker.super_damage_finished > time && inflictor.classname != "door")//R00k: from QW-GPL, because the attacker can own quad, and push a door to kill (ie, DM2)
@@ -205,6 +202,17 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 		dir = normalize(dir);
 		targ.velocity = targ.velocity + dir*damage*8;
 	}
+	
+	if(cvar("saved1") == 1)
+	{
+		if (targ.classname == "player" && attacker.classname == "player"
+		    && targ != attacker)
+		{
+		    local string temp;
+		    temp = ftos(damage);
+		    centerprint4(attacker, targ.netname, ": ", temp, "\n\n\n\n\n\n\n\n");
+		}
+	}
 
 	// check for godmode or invincibility
 	if (targ.flags & FL_GODMODE)
@@ -219,12 +227,28 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 		}	
 		return;
 	}
+	
+
 
 	// do the damage
 	targ.health = targ.health - take;
 			
 	if (targ.health <= 0)
 	{
+		// ELOHIM_MOD - print info for practice mode
+		if(cvar("saved1") == 1)
+		{
+		    if (targ.classname == "player" && attacker.classname == "player"
+			&& targ != attacker)
+		    {
+			local string temp;
+			temp = ftos(attacker.health);
+			centerprint5(targ, "\n\n\n\n", attacker.netname, " has ", temp, " health");
+			sprint5(targ, "\n\n\n\n", attacker.netname, " has ", temp, " health\n");
+		    }
+		}
+		// END_MOD
+		
 		Killed (targ, attacker);
 		return;
 	}

@@ -333,7 +333,10 @@ void() W_FireShotgun =
 
 //R00k: no view kick, removed	self.punchangle_x = -2;
 	
-	self.currentammo = self.ammo_shells = self.ammo_shells - 1;
+	if (!(cvar("saved1")==1))
+        self.currentammo = self.ammo_shells = self.ammo_shells - 1;
+        
+        
 	dir = aim (self, 100000);
 	FireBullets (6, dir, '0.04 0.04 0');
 };
@@ -357,8 +360,9 @@ void() W_FireSuperShotgun =
 	sound (self ,CHAN_WEAPON, "weapons/shotgn2.wav", 1, ATTN_NORM);	
 
 	//R00k: no view kick removed self.punchangle_x = -4;
-	
+	if (!(cvar("saved1")==1))
 	self.currentammo = self.ammo_shells = self.ammo_shells - 2;
+	
 	dir = aim (self, 100000);
 	FireBullets (14, dir, '0.14 0.08 0');
 };
@@ -437,6 +441,7 @@ void() W_FireRocket =
 {
 	local	entity missile;
 	
+	if (!(cvar("saved1")==1))
 	self.currentammo = self.ammo_rockets = self.ammo_rockets - 1;
 	
 	sound (self, CHAN_WEAPON, "weapons/sgun1.wav", 1, ATTN_NORM);
@@ -547,6 +552,7 @@ void() W_FireLightning =
 	}
 
 	//R00k: removed self.punchangle_x = -2;
+	if (!(cvar("saved1")==1))
 	self.currentammo = self.ammo_cells = self.ammo_cells - 1;
 	org = self.origin + '0 0 16';
 	
@@ -619,6 +625,7 @@ void() W_FireGrenade =
 {
 	local	entity missile;
 	
+	if (!(cvar("saved1")==1))
 	self.currentammo = self.ammo_rockets = self.ammo_rockets - 1;
 	
 	sound (self, CHAN_WEAPON, "weapons/grenade.wav", 1, ATTN_NORM);
@@ -796,7 +803,10 @@ void() W_FireSuperSpikes =
 	
 	sound (self, CHAN_WEAPON, "weapons/spike2.wav", 1, ATTN_NORM);
 	self.attack_finished = time + 0.2;
+	
+	if (!(cvar("saved1")==1))
 	self.currentammo = self.ammo_nails = self.ammo_nails - 2;
+	
 	dir = aim (self, 1000);
 	launch_spike (self.origin + '0 0 16', dir);
 	newmis.touch = superspike_touch;
@@ -840,7 +850,10 @@ void(float ox) W_FireSpikes =
 
 	sound (self, CHAN_WEAPON, "weapons/rocket1i.wav", 1, ATTN_NORM);
 	self.attack_finished = time + 0.2;
+	
+	if (!(cvar("saved1")==1))
 	self.currentammo = self.ammo_nails = self.ammo_nails - 1;
+	
 	dir = aim (self, 1000);
 	launch_spike (self.origin + '0 0 16' + v_right*ox, dir);
 

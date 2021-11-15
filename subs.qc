@@ -21,6 +21,19 @@ float reset_flag;
 float IDEAL_DIST_FROM_DM_SPAWN_POINT    = 384;
 float MIN_DIST_FROM_DM_SPAWN_POINT    = 84;
 entity(float forceSpawn) SelectSpawnPoint;
+void (entity client, string s1, string s2, string s3, string s4) centerprint4 = #73;
+void (entity client, string s1, string s2, string s3, string s4, string s5) centerprint5 = #73;
+
+
+void (entity client, string s1, string s2, string s3, string s4, string s5) sprint5 = #24;
+
+float gamemode;
+
+
+float GM_Practice            = 1;
+float GM_MatchMode            = 2;
+
+
 void() SUB_Null = {};
 
 void() SUB_Remove = {remove(self);};
@@ -344,3 +357,60 @@ void (void() thinkst) SUB_CheckRefire =
 	self.cnt = 1;
 	self.think = thinkst;
 };
+
+
+
+
+//Duels MOD BEGIN
+
+//
+//  D O  I T E M
+//
+//  Do something to all items of the given type.  For each item,
+//  'dofunc()' is called with 'self' pointing to the item.
+//
+void (void () dofunc, string item_name) utils_do_item =
+{
+    local entity oldself;
+
+    oldself = self;
+    self = find(world, classname, item_name);
+    while (self)
+    {
+        dofunc();
+        self = find(self, classname, item_name);
+    }
+    self = oldself;
+};
+
+
+
+//
+//  D O  I T E M S
+//
+//  Do the same thing to all respawnable items.
+//
+void (void () dofunc) utils_do_items =
+{
+    utils_do_item(dofunc, "item_health");
+    utils_do_item(dofunc, "item_armor1");
+    utils_do_item(dofunc, "item_armor2");
+    utils_do_item(dofunc, "item_armorInv");
+    utils_do_item(dofunc, "item_shells");
+    utils_do_item(dofunc, "item_spikes");
+    utils_do_item(dofunc, "item_rockets");
+    utils_do_item(dofunc, "item_cells");
+    utils_do_item(dofunc, "weapon_nailgun");
+    utils_do_item(dofunc, "weapon_supernailgun");
+    utils_do_item(dofunc, "weapon_supershotgun");
+    utils_do_item(dofunc, "weapon_rocketlauncher");
+    utils_do_item(dofunc, "weapon_grenadelauncher");
+    utils_do_item(dofunc, "weapon_lightning");
+    utils_do_item(dofunc, "item_sigil");
+    utils_do_item(dofunc, "item_artifact_invulnerability");
+    utils_do_item(dofunc, "item_artifact_envirosuit");
+    utils_do_item(dofunc, "item_artifact_invisibility");
+    utils_do_item(dofunc, "item_artifact_super_damage");
+};
+
+//Duels MOD END
