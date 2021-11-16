@@ -12,6 +12,7 @@ request.qc		// R00k: voting system
 weapons.qc
 world.qc
 spectate.qc		// R00k: Modified from QuakeWorld GPL
+crmod.qc	//Dan the man
 client.qc
 player.qc
 monsters.qc

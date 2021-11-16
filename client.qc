@@ -73,7 +73,7 @@ void() SetNewParms =
 {
     parm1 = IT_SHOTGUN | IT_AXE | IT_ROCKET_LAUNCHER | IT_ARMOR3 |
             IT_SUPER_SHOTGUN | IT_NAILGUN | IT_GRENADE_LAUNCHER |
-            IT_LIGHTNING | IT_SUPER_NAILGUN | IT_ARMOR3;
+            IT_LIGHTNING | IT_SUPER_NAILGUN;
 
     parm2 = 100;
     parm3 = 200;
@@ -1714,16 +1714,22 @@ void() PlayerPostThink =
 		if (self.watertype == CONTENT_WATER)
 			sound (self, CHAN_BODY, "player/h2ojump.wav", 1, ATTN_NORM);
 	
-		else if (self.jump_flag < -650)
-		{
-			T_Damage (self, world, world, 5); 
-			sound (self, CHAN_VOICE, "player/land2.wav", 1, ATTN_NORM);
-			self.deathtype = "falling";
-		}
-	
 		else
-			sound (self, CHAN_VOICE, "player/land.wav", 1, ATTN_NORM);
-
+		{ 
+			if (self.jump_flag < -650)
+			{
+				T_Damage (self, world, world, 5); 
+				sound (self, CHAN_VOICE, "player/land2.wav", 1, ATTN_NORM);
+				if ((self.health <= 5))
+				{
+					self.deathtype = "falling";
+				}
+			}
+			else
+			{
+				sound (self, CHAN_VOICE, "player/land.wav", 1, ATTN_NORM);
+			}
+		}
 		self.jump_flag = 0;
 	}
 

@@ -191,6 +191,8 @@ void() worldspawn =
 	startingserverflags = serverflags;
 	lastspawn = world;
 //	InitBodyQueue ();
+	//Start with practice mode on
+	cvar_set ("saved1", "1");
 
 	// custom map attributes
 	if (self.model == "maps/e1m8.bsp")
@@ -379,7 +381,7 @@ void() worldspawn =
 	lightstyle(63, "a");
 	
 	
-	gamemode = cvar("saved1");
+	//gamemode = cvar("saved1");
 };
 
 void() StartFrame =
