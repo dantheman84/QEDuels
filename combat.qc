@@ -159,14 +159,7 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 	// used by buttons and triggers to set activator for target firing
 	damage_attacker = attacker;
 
-	// team play damage avoidance
-	 // ELOHIM_MOD - nested the ifs
-	    if (teamplay == 1)
-	    {
-		if ( (targ.team > 0)&&(targ.team == attacker.team) )
-		    return;
-	    }
-	    // END_MOD
+
 
 	// check for quad damage powerup on the attacker
 	if (attacker.super_damage_finished > time && inflictor.classname != "door")//R00k: from QW-GPL, because the attacker can own quad, and push a door to kill (ie, DM2)
@@ -175,20 +168,23 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 	// save damage based on the target's armor level
 	save = ceil(targ.armortype*damage);
 
-	if (save >= targ.armorvalue)
+	if ((save >= targ.armorvalue) && !((teamplay == 1)&& (targ.team == attacker.team)))
 	{
 		save = targ.armorvalue;
 		targ.armortype = 0;	// lost all armor
 		targ.items = targ.items - (targ.items & (IT_ARMOR1 | IT_ARMOR2 | IT_ARMOR3));
 	}
 	
+	if !(teamplay == 1 && (targ.team == attacker.team))
+	{
 	targ.armorvalue = targ.armorvalue - save;
 	take = ceil(damage-save);
+	}
 
 	// add to the damage total for clients, which will be sent as a single
 	// message at the end of the frame
 	// FIXME: remove after combining shotgun blasts?
-	if (targ.flags & FL_CLIENT)
+	if ((targ.flags & FL_CLIENT) )
 	{
 		targ.dmg_take = targ.dmg_take + take;
 		targ.dmg_save = targ.dmg_save + save;
@@ -202,6 +198,16 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 		dir = normalize(dir);
 		targ.velocity = targ.velocity + dir*damage*8;
 	}
+	
+	
+	// team play damage avoidance
+	 // ELOHIM_MOD - nested the ifs
+	    if (teamplay == 1)
+	    {
+		if ( (targ.team > 0)&&(targ.team == attacker.team) )
+		    return;
+	    }
+	    // END_MOD
 	
 	if(cvar("saved1") == 1)
 	{

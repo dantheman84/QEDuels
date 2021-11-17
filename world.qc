@@ -193,6 +193,7 @@ void() worldspawn =
 //	InitBodyQueue ();
 	//Start with practice mode on
 	cvar_set ("saved1", "1");
+	cvar_set ("teamplay", "1");
 
 	// custom map attributes
 	if (self.model == "maps/e1m8.bsp")

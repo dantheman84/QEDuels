@@ -1090,7 +1090,9 @@ void() CheckTimeLimit =
 				
 				//remove all players from the game and reset frags
 				
-				localcmd ("saved1 2\n");
+				//localcmd ("saved1 2\n");
+				cvar_set ("saved1", "2");
+				cvar_set ("teamplay", "0");
 				
 				while((p = find(p,classname,"player"))) {
 				oself = self;
