@@ -1053,9 +1053,32 @@ Exit deathmatch games upon conditions
 ============
 */
 
+
+
+
+
 //R00k: Split these into two different functions to be called at different intervals.
 void() GibPlayer;
 void() SUB_regen;
+
+
+//
+//  G I B  P L A Y E R
+//
+//  Gib players; set observers to colour 0.  Called at start
+//  and end of match.
+//
+
+void () match_gib_player =
+{
+        self.health = -99;
+        GibPlayer();
+        self.deadflag = DEAD_DYING;
+        self.think = respawn;
+        self.nextthink = time + 1;
+        // start of match
+        self.frags = 0;
+};
 
 
 void() CheckTimeLimit =
@@ -1094,7 +1117,7 @@ void() CheckTimeLimit =
 				cvar_set ("saved1", "2");
 				cvar_set ("teamplay", "0");
 				
-				while((p = find(p,classname,"player"))) {
+				/*while((p = find(p,classname,"player"))) {
 				oself = self;
 				self=p;
 				p.health = -99;
@@ -1105,7 +1128,9 @@ void() CheckTimeLimit =
 				p.frags = 0;
 				
 				self = oself;
-				}
+				}*/
+				
+				utils_do_players(match_gib_player);
 
 				utils_do_items(SUB_regen);
 				//remove all backpacks
