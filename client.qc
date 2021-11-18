@@ -1090,6 +1090,7 @@ void() CheckTimeLimit =
 		return;
 		
 	tlimit = cvar("timelimit") * 60;
+	
 
 	if (tlimit)
 	{
@@ -1109,26 +1110,13 @@ void() CheckTimeLimit =
 			{
 				
 				//reset stats for 1v1
-				bprint ("\ngame ends in 10 minutes\n\n");
+				bprint ("\nFIGHT!\n");
 				
 				//remove all players from the game and reset frags
 				
 				//localcmd ("saved1 2\n");
 				cvar_set ("saved1", "2");
 				cvar_set ("teamplay", "0");
-				
-				/*while((p = find(p,classname,"player"))) {
-				oself = self;
-				self=p;
-				p.health = -99;
-				GibPlayer();
-				p.deadflag = DEAD_DYING;
-				p.think = respawn;
-				p.nextthink = time + 1;
-				p.frags = 0;
-				
-				self = oself;
-				}*/
 				
 				utils_do_players(match_gib_player);
 
@@ -1138,6 +1126,7 @@ void() CheckTimeLimit =
 				
 				bprint("All items have respawned\n");
 				//SetMatchParms();
+				
 				
 			}
 			else
