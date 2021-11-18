@@ -728,24 +728,10 @@ void() superspike_touch =
 		return;
 	}
 	
-	// hit something that bleeds
+// hit something that bleeds
 	if (other.takedamage)
 	{
-		if (trace_ent.solid != SOLID_BSP)
-		{
 		spawn_touchblood (18);
-		T_Damage (other, self, self.owner, 18);
-		}
-		else
-		{
-			WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-			WriteByte (MSG_BROADCAST, TE_SUPERSPIKE);
-			WriteCoord (MSG_BROADCAST, self.origin_x);
-			WriteCoord (MSG_BROADCAST, self.origin_y);
-			WriteCoord (MSG_BROADCAST, self.origin_z);
-		}
-		spawn_touchblood (18);
-		other.deathtype = "supernail";
 		T_Damage (other, self, self.owner, 18);
 	}
 	else
