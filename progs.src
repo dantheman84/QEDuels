@@ -4,6 +4,7 @@ defs.qc
 //fteextensions.qc
 //motd.qc
 subs.qc
+crmod.qc	//Dan the man
 fight.qc
 ai.qc
 combat.qc
@@ -12,7 +13,6 @@ request.qc		// R00k: voting system
 weapons.qc
 world.qc
 spectate.qc		// R00k: Modified from QuakeWorld GPL
-crmod.qc	//Dan the man
 client.qc
 player.qc
 monsters.qc

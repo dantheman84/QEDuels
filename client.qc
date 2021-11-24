@@ -1102,97 +1102,148 @@ void() CheckTimeLimit =
 		}
 	}
 
-	if ((time >= timelimitcheck))
+if ((time >= timelimitcheck))
 	{
 		if (tlimit)
 		{
-			if ((rint ((tlimit - time)) == 600))
-			{
-				
-				//reset stats for 1v1
-				bprint ("\nFIGHT!\n");
-				
-				//remove all players from the game and reset frags
-				
-				//localcmd ("saved1 2\n");
-				cvar_set ("saved1", "2");
-				cvar_set ("teamplay", "0");
-				
-				utils_do_players(match_gib_player);
+		if((rint ((tlimit - time)) == 630))
+		{
+			bprint ("\n Match begins in 30 seconds \n");
 
-				utils_do_items(SUB_regen);
-				//remove all backpacks
-				utils_do_item(SUB_Remove, "item_backpack");
-				
-				bprint("All items have respawned\n");
-				//SetMatchParms();
-				
-				
+		}
+		else
+		    {
+		    if((rint ((tlimit - time)) == 610))
+		    {
+			bprint ("\"\n Match begins in 10 seconds\n");
+
+		    }
+		    else
+		    {
+			if((rint ((tlimit - time)) == 605))
+			{
+			    bprint ("\"\n 5 \n");
+	    
 			}
 			else
 			{
-			if ((rint ((tlimit - time)) == 300))
-			{
-				bprint ("\ngame ends in 5 minutes\n\n");
-			}
-			else
-			{
-				if ((rint ((tlimit - time)) == 60))
+
+			    if((rint ((tlimit - time)) == 604))
+			    {
+				bprint ("\"\n 4 \n");
+		
+			    }
+			    else
+			    {
+
+				if((rint ((tlimit - time)) == 603))
 				{
-					bprint ("\ngame ends in 1 minute\n\n");
+				    bprint ("\"\n 3 \n");
+		    
 				}
 				else
 				{
-					if ((rint ((tlimit - time)) == 30))
+				    if((rint ((tlimit - time)) == 602))
+				    {
+					bprint ("\"\n 2 \n");
+			
+				    }
+				    else
+				    {
+					if((rint ((tlimit - time)) == 601))
 					{
-						bprint ("\ngame ends in 30 seconds\n\n");
+					    bprint ("\"\n 1 \n");
+			    
 					}
 					else
 					{
-						if ((rint ((tlimit - time)) == 10))
+						if ((rint ((tlimit - time)) == 600))
 						{
-							bprint ("\ngame ends in 10 seconds\n\n");
+							
+							//reset stats for 1v1
+							bprint ("\"\n FIGHT! \n");
+							
+							//remove all players from the game and reset frags
+							
+							//localcmd ("saved1 2\n");
+							cvar_set ("saved1", "2");
+							cvar_set ("teamplay", "0");
+							
+							utils_do_players(match_gib_player);
+
+							utils_do_items(SUB_regen);
+							//remove all backpacks
+							utils_do_item(SUB_Remove, "item_backpack");
+							
+							bprint("All items have respawned\n");
+							//SetMatchParms();
+							
+							
 						}
 						else
 						{
-							if ((rint ((tlimit - time)) == 5))
+						if ((rint ((tlimit - time)) == 300))
+						{
+							bprint ("\ngame ends in 5 minutes\n\n");
+						}
+						else
+						{
+							if ((rint ((tlimit - time)) == 60))
 							{
-								bprint (" 5 \n");
+								bprint ("\ngame ends in 1 minute\n\n");
 							}
 							else
 							{
-								if ((rint ((tlimit - time)) == 4))
+								if ((rint ((tlimit - time)) == 30))
 								{
-									bprint (" 4 \n");
+									bprint ("\ngame ends in 30 seconds\n\n");
 								}
 								else
 								{
-									if ((rint ((tlimit - time)) == 3))
+									if ((rint ((tlimit - time)) == 10))
 									{
-										bprint (" 3 \n");
+										bprint ("\ngame ends in 10 seconds\n\n");
 									}
 									else
 									{
-										if ((rint ((tlimit - time)) == 2))
+										if ((rint ((tlimit - time)) == 5))
 										{
-											bprint (" 2 \n");
+											bprint (" 5 \n");
 										}
 										else
 										{
-											if ((rint ((tlimit - time)) == 1))
+											if ((rint ((tlimit - time)) == 4))
 											{
-												bprint (" 1 \n");
+												bprint (" 4 \n");
+											}
+											else
+											{
+												if ((rint ((tlimit - time)) == 3))
+												{
+													bprint (" 3 \n");
+												}
+												else
+												{
+													if ((rint ((tlimit - time)) == 2))
+													{
+														bprint (" 2 \n");
+													}
+													else
+													{
+														if ((rint ((tlimit - time)) == 1))
+														{
+															bprint (" 1 \n");
+														}
+													}
+												}
 											}
 										}
 									}
 								}
 							}
 						}
-					}
-				}
-			}
-		    }				
-		}								
+					    }				
+		}}}}}}}}							
 		timelimitcheck = (time + 1);
 	}
 };
