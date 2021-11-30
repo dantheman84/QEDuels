@@ -552,18 +552,20 @@ void() weapon_touch =
 	bound_other_ammo ();
 
 	// change to the weapon
+	//dont change the weapon for 1v1
 	old = other.items;
 	other.items = other.items | new;
 	
 	stemp = self;
 	self = other;
-
+	/*
 	if (!deathmatch)
 		self.weapon = new;
 
 	else
 		Deathmatch_Weapon (old, new);
-
+	*/
+	
 	W_SetCurrentAmmo();
 
 	self = stemp;
@@ -741,7 +743,8 @@ void() ammo_touch =
 	stuffcmd (other, "bf\n");
 
 	// change to a better weapon if appropriate
-	if ( other.weapon == best )
+	//removed for 1v1s
+	/*if ( other.weapon == best )
 	{
 		stemp = self;
 		self = other;
@@ -749,6 +752,7 @@ void() ammo_touch =
 		W_SetCurrentAmmo ();
 		self = stemp;
 	}
+	*/
 
 	// if changed current ammo, update it
 	stemp = self;
@@ -1429,6 +1433,8 @@ void() BackpackTouch =
 	self = other;
 	
 	// change to the weapon
+	//removed for duels
+	/*
 		if (!deathmatch)
 		{
 			self.weapon = new;
@@ -1447,6 +1453,7 @@ void() BackpackTouch =
 				Deathmatch_Weapon (old, new);
 			}
 		}
+	*/
 	W_SetCurrentAmmo ();
 };
 
