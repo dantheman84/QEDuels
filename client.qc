@@ -1106,21 +1106,21 @@ if ((time >= timelimitcheck))
 	{
 		if (tlimit)
 		{
-		if((rint ((tlimit - time)) == 630))
+		if((rint ((tlimit - time)) == 930))
 		{
 			bprint ("\n Match begins in 30 seconds \n");
 
 		}
 		else
 		    {
-		    if((rint ((tlimit - time)) == 610))
+		    if((rint ((tlimit - time)) == 910))
 		    {
 			bprint ("\"\n Match begins in 10 seconds\n");
 
 		    }
 		    else
 		    {
-			if((rint ((tlimit - time)) == 605))
+			if((rint ((tlimit - time)) == 905))
 			{
 			    bprint ("\"\n 5 \n");
 	    
@@ -1128,7 +1128,7 @@ if ((time >= timelimitcheck))
 			else
 			{
 
-			    if((rint ((tlimit - time)) == 604))
+			    if((rint ((tlimit - time)) == 904))
 			    {
 				bprint ("\"\n 4 \n");
 		
@@ -1136,28 +1136,28 @@ if ((time >= timelimitcheck))
 			    else
 			    {
 
-				if((rint ((tlimit - time)) == 603))
+				if((rint ((tlimit - time)) == 903))
 				{
 				    bprint ("\"\n 3 \n");
 		    
 				}
 				else
 				{
-				    if((rint ((tlimit - time)) == 602))
+				    if((rint ((tlimit - time)) == 902))
 				    {
 					bprint ("\"\n 2 \n");
 			
 				    }
 				    else
 				    {
-					if((rint ((tlimit - time)) == 601))
+					if((rint ((tlimit - time)) == 901))
 					{
 					    bprint ("\"\n 1 \n");
 			    
 					}
 					else
 					{
-						if ((rint ((tlimit - time)) == 600))
+						if ((rint ((tlimit - time)) == 900))
 						{
 							
 							//reset stats for 1v1
@@ -1177,6 +1177,15 @@ if ((time >= timelimitcheck))
 							
 							bprint("All items have respawned\n");
 							//SetMatchParms();
+							
+							
+						}
+						else
+						{
+						if ((rint ((tlimit - time)) == 600))
+						{
+							
+							bprint ("\ngame ends in 10 minutes\n\n");
 							
 							
 						}
@@ -1243,7 +1252,7 @@ if ((time >= timelimitcheck))
 							}
 						}
 					    }				
-		}}}}}}}}							
+		}}}}}}}}}							
 		timelimitcheck = (time + 1);
 	}
 };

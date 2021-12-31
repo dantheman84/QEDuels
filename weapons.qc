@@ -1401,7 +1401,7 @@ void() ImpulseCommands =
 	if ((self.impulse >= 100) && (self.impulse <= 120))
 		Request_Impulse_Commands();
 
-	if (self.impulse == 220 || self.impulse == 225)
+	if (self.impulse == 220)
 	{
 		//if ((coop)||(deathmatch))
 		{
@@ -1409,7 +1409,7 @@ void() ImpulseCommands =
 		}
 	}
 
-	if (self.impulse == 221 && !(cvar("saved1") == 2))
+	if (self.impulse == 221 || !(cvar("saved1") == 2))
 	{
         //if ((coop) || (deathmatch))
 		{
