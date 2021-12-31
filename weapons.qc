@@ -1409,7 +1409,7 @@ void() ImpulseCommands =
 		}
 	}
 
-	if (self.impulse == 221 || !(cvar("saved1") == 2))
+	if (self.impulse == 221 && !(cvar("saved1") == 2))
 	{
         //if ((coop) || (deathmatch))
 		{
